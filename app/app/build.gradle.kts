@@ -40,8 +40,31 @@ android {
 dependencies {
 
     val navigationVersion = "2.7.4"
+    val retrofitVersion = "2.9.0"
+    val okHttpVersion = "4.9.1"
+    val rxJavaVersion ="3.1.3"
+    val rxJavaAdapterVersion = "3.0.0"
+    val koinVersion = "3.2.3"
+    val okHttpLoggingVersion = "4.9.1"
 
     implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+
+    // Gson Converter
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+
+    // OkHttp
+    implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
+
+    // RxJava and RxAndroid
+    implementation("io.reactivex.rxjava3:rxjava:$rxJavaVersion")
+    implementation("io.reactivex.rxjava3:rxandroid:$rxJavaVersion")
+    implementation("com.github.akarnokd:rxjava3-retrofit-adapter:$rxJavaAdapterVersion")
+    implementation("com.squareup.okhttp3:logging-interceptor:$okHttpLoggingVersion")
+
+    implementation("io.insert-koin:koin-android:$koinVersion")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
