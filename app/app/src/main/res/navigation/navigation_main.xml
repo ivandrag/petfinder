@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/animalListFragment">
+
+    <fragment
+        android:id="@+id/animalListFragment"
+        android:name="com.petfinder.presentation.animalList.AnimalListFragment"
+        tools:layout="@layout/fragment_animal_list">
+
+        <action
+            android:id="@+id/animal_list_to_details_fragment"
+            app:destination="@id/animalDetailsFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/animalDetailsFragment"
+        android:name="com.petfinder.presentation.animalDetails.AnimalDetailsFragment"
+        tools:layout="@layout/fragment_animal_details" />
+</navigation>
