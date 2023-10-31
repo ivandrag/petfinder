@@ -20,26 +20,31 @@ class AnimalDetailsViewModel(
                 animalDetailsRepository.getAnimalDetails(id)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { animalDetailsResponse, t2 ->
-                        animalDetailsResponse?.let {
-                            val animal = animalDetailsResponse.animal
-                            _animalDetailsState.value = AnimalDetailsState.Success(
-                                UiAnimalDetails(
-                                    name = animal.name,
-                                    breed = animal.breeds.primary.orEmpty(),
-                                    size = animal.size,
-                                    gender = animal.gender,
-                                    status = animal.status,
-                                    distance = animal.distance.toString()
-                                )
-                            )
-                        }
-                    }
+                    .subscribe(::handleSuccess, ::handleError)
             )
         }
     }
 
+    private fun handleSuccess(animalDetailsResponse: AnimalDetailsResponse) {
+        val animal = animalDetailsResponse.animal
+        _animalDetailsState.value = AnimalDetailsState.Success(
+            UiAnimalDetails(
+                name = animal.name,
+                breed = animal.breeds.primary.orEmpty(),
+                size = animal.size,
+                gender = animal.gender,
+                status = animal.status,
+                distance = animal.distance.toString()
+            )
+        )
+    }
+
+    private fun handleError(throwable: Throwable) {
+        _animalDetailsState.value = AnimalDetailsState.Error
+    }
+
     sealed interface AnimalDetailsState {
         data class Success(val animalDetails: UiAnimalDetails) : AnimalDetailsState
+        data object Error : AnimalDetailsState
     }
 }

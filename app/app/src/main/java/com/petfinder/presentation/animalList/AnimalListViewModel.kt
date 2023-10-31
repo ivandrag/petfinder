@@ -20,13 +20,12 @@ class AnimalListViewModel(
     val animals: LiveData<PagingData<UiAnimal>> = _animals
 
     fun getAllAnimals() {
-        disposable.add(
-            animalListRepository.getAllAnimals()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map { pagingData ->
-                    pagingData.map { animal ->
-                        UiAnimal(
+        disposable.add(animalListRepository.getAllAnimals()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { pagingData ->
+                pagingData.map { animal ->
+                    UiAnimal(
                         id = animal.id,
                         photo = animal.photos.firstOrNull()?.medium,
                         name = animal.name,

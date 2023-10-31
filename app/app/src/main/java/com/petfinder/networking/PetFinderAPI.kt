@@ -1,6 +1,5 @@
 package com.petfinder.networking
 
-import com.petfinder.domain.model.Animal
 import com.petfinder.domain.model.AnimalListResponse
 import com.petfinder.domain.model.TokenResponse
 import com.petfinder.presentation.animalDetails.AnimalDetailsResponse
