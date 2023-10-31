@@ -1,26 +1,44 @@
 package com.petfinder.networking
 
+import com.petfinder.domain.manager.GetAccessTokenManager
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
+import okhttp3.Authenticator
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import okhttp3.Route
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+
+class AuthTokenAuthenticator(
+    private val getAccessTokenManager: GetAccessTokenManager
+) : Authenticator {
+
+    override fun authenticate(route: Route?, response: Response): Request? {
+        val newToken = getAccessTokenManager.getToken().blockingGet()
+        return response.request.newBuilder()
+            .header("Authorization", "Bearer $newToken")
+            .build()
+    }
+}
 
 fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
     HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-fun provideOkHttp(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+fun provideOkHttp(
+    httpLoggingInterceptor: HttpLoggingInterceptor,
+    getAccessTokenManager: GetAccessTokenManager
+): OkHttpClient {
     val okHttpClient = OkHttpClient.Builder()
-    okHttpClient.connectTimeout(5, TimeUnit.MINUTES)
-    okHttpClient.readTimeout(5, TimeUnit.MINUTES);
     okHttpClient.apply {
-        if (BuildConfig.DEBUG) {
-            addInterceptor(httpLoggingInterceptor)
-        }
+        connectTimeout(5, TimeUnit.MINUTES)
+        readTimeout(5, TimeUnit.MINUTES)
+        addInterceptor(httpLoggingInterceptor)
+        authenticator(AuthTokenAuthenticator(getAccessTokenManager))
     }
     return okHttpClient.build()
 }

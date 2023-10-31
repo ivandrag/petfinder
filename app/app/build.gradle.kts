@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.petfinder"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.petfinder"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -39,13 +39,17 @@ android {
 
 dependencies {
 
+    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
     val navigationVersion = "2.7.4"
     val retrofitVersion = "2.9.0"
     val okHttpVersion = "4.9.1"
-    val rxJavaVersion ="3.1.3"
+    val rxJavaVersion = "3.1.3"
     val rxJavaAdapterVersion = "3.0.0"
     val koinVersion = "3.2.3"
     val okHttpLoggingVersion = "4.9.1"
+    val pagingVersion = "3.2.1"
+    val pagingRxJava3Version = "3.2.1"
+    val rxAndroidVersion = "3.0.0"
 
     implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
 
@@ -60,11 +64,14 @@ dependencies {
 
     // RxJava and RxAndroid
     implementation("io.reactivex.rxjava3:rxjava:$rxJavaVersion")
-    implementation("io.reactivex.rxjava3:rxandroid:$rxJavaVersion")
+    implementation("io.reactivex.rxjava3:rxandroid:$rxAndroidVersion")
     implementation("com.github.akarnokd:rxjava3-retrofit-adapter:$rxJavaAdapterVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpLoggingVersion")
 
     implementation("io.insert-koin:koin-android:$koinVersion")
+
+    implementation("androidx.paging:paging-common-ktx:$pagingVersion")
+    implementation("androidx.paging:paging-rxjava3:$pagingRxJava3Version")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
