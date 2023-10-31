@@ -8,7 +8,9 @@ import com.petfinder.R
 import com.petfinder.databinding.ItemAnimalBinding
 import com.petfinder.presentation.animalList.model.UiAnimal
 
-class AnimalAdapter : PagingDataAdapter<UiAnimal, AnimalAdapter.AnimalViewHolder>(DIFF_CALLBACK) {
+class AnimalAdapter(
+    private val onItemClickListener: (Int) -> Unit
+) : PagingDataAdapter<UiAnimal, AnimalAdapter.AnimalViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -17,7 +19,7 @@ class AnimalAdapter : PagingDataAdapter<UiAnimal, AnimalAdapter.AnimalViewHolder
             parent,
             false
         )
-        return AnimalViewHolder(binding)
+        return AnimalViewHolder(binding, onItemClickListener)
     }
 
     override fun onBindViewHolder(holder: AnimalViewHolder, position: Int) {
@@ -26,7 +28,8 @@ class AnimalAdapter : PagingDataAdapter<UiAnimal, AnimalAdapter.AnimalViewHolder
     }
 
     class AnimalViewHolder(
-        private val binding: ItemAnimalBinding
+        private val binding: ItemAnimalBinding,
+        private val onItemClickListener: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(uiAnimal: UiAnimal) {
@@ -39,6 +42,9 @@ class AnimalAdapter : PagingDataAdapter<UiAnimal, AnimalAdapter.AnimalViewHolder
                     .into(animalImageView)
                 nameTextView.text = uiAnimal.name
                 genderTextView.text = uiAnimal.gender
+            }
+            itemView.setOnClickListener {
+                onItemClickListener(uiAnimal.id)
             }
         }
     }
