@@ -15,8 +15,6 @@ class AnimalListPagingRemoteDataSource(
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Animal>> {
         val position = params.key ?: 1
 
-        println("##Key $position")
-
         return petFinderAPI.getAllAnimals(position)
             .subscribeOn(Schedulers.io())
             .map { response ->
@@ -38,7 +36,9 @@ class AnimalListPagingRemoteDataSource(
         return LoadResult.Page(
             data = response.animals,
             prevKey = if (position == 1) null else position - 1,
-            nextKey = if (position == response.pagination.totalPages) null else position + 1
+            nextKey = if (position == response.pagination.totalPages) null else position + 1,
+            itemsAfter = LoadResult.Page.COUNT_UNDEFINED,
+            itemsBefore = LoadResult.Page.COUNT_UNDEFINED
         )
     }
 }

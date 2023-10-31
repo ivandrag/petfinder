@@ -2,6 +2,7 @@ package com.petfinder.presentation.animalList.model
 
 data class UiAnimal(
     val id: Int,
-    val type: String,
-    val species: String,
+    val photo: String?,
+    val name: String,
+    val gender: String
 )

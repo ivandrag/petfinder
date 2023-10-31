@@ -3,6 +3,8 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.petfinder.R
 import com.petfinder.databinding.ItemAnimalBinding
 import com.petfinder.presentation.animalList.model.UiAnimal
 
@@ -20,7 +22,6 @@ class AnimalAdapter : PagingDataAdapter<UiAnimal, AnimalAdapter.AnimalViewHolder
 
     override fun onBindViewHolder(holder: AnimalViewHolder, position: Int) {
         val uiAnimal = getItem(position)
-        println("##Adapter $uiAnimal")
         uiAnimal?.let { holder.bind(it) }
     }
 
@@ -30,8 +31,14 @@ class AnimalAdapter : PagingDataAdapter<UiAnimal, AnimalAdapter.AnimalViewHolder
 
         fun bind(uiAnimal: UiAnimal) {
             with(binding) {
-                typeTextView.text = uiAnimal.type
-                speciesTextView.text = uiAnimal.species
+                Glide
+                    .with(itemView.context)
+                    .load(uiAnimal.photo)
+                    .error(R.drawable.ic_dog_placeholder)
+                    .centerCrop()
+                    .into(animalImageView)
+                nameTextView.text = uiAnimal.name
+                genderTextView.text = uiAnimal.gender
             }
         }
     }

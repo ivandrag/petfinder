@@ -50,29 +50,20 @@ dependencies {
     val pagingVersion = "3.2.1"
     val pagingRxJava3Version = "3.2.1"
     val rxAndroidVersion = "3.0.0"
+    val glideVersion = "4.13.0"
 
     implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
-
-    // Retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-
-    // Gson Converter
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-
-    // OkHttp
     implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
-
-    // RxJava and RxAndroid
     implementation("io.reactivex.rxjava3:rxjava:$rxJavaVersion")
     implementation("io.reactivex.rxjava3:rxandroid:$rxAndroidVersion")
     implementation("com.github.akarnokd:rxjava3-retrofit-adapter:$rxJavaAdapterVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpLoggingVersion")
-
     implementation("io.insert-koin:koin-android:$koinVersion")
-
     implementation("androidx.paging:paging-common-ktx:$pagingVersion")
     implementation("androidx.paging:paging-rxjava3:$pagingRxJava3Version")
-
+    implementation("com.github.bumptech.glide:glide:$glideVersion")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")

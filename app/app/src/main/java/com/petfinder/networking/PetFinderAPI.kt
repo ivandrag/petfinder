@@ -21,6 +21,7 @@ interface PetFinderAPI {
 
     @GET(ANIMAL_LIST)
     fun getAllAnimals(
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("type") type: String = "dog"
     ): Single<AnimalListResponse>
 }

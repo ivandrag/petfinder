@@ -29,8 +29,9 @@ class AnimalListViewModel(
                 pagingData.map { animal ->
                     UiAnimal(
                         id = animal.id,
-                        type = animal.type,
-                        species = animal.species,
+                        photo = animal.photos.firstOrNull()?.medium,
+                        name = animal.name,
+                        gender = animal.gender
                     )
                 }
             }
