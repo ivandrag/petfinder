@@ -3,6 +3,7 @@ package com.petfinder.networking
 import com.petfinder.domain.model.Animal
 import com.petfinder.domain.model.AnimalListResponse
 import com.petfinder.domain.model.TokenResponse
+import com.petfinder.presentation.animalDetails.AnimalDetailsResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -30,5 +31,5 @@ interface PetFinderAPI {
     @GET(ANIMAL_DETAILS)
     fun getAnimalDetails(
         @Path("id") id: Int,
-    ): Single<Animal>
+    ): Single<AnimalDetailsResponse>
 }
