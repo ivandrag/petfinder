@@ -51,6 +51,8 @@ dependencies {
     val pagingRxJava3Version = "3.2.1"
     val rxAndroidVersion = "3.0.0"
     val glideVersion = "4.13.0"
+    val mockKVersion = "1.13.3"
+    val coreTestingVersion = "2.1.0"
 
     implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
@@ -68,6 +70,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation("io.mockk:mockk:$mockKVersion")
+    testImplementation("androidx.arch.core:core-testing:$coreTestingVersion")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
 }

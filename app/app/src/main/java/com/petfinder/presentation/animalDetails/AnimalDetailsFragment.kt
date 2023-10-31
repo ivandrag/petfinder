@@ -19,6 +19,10 @@ class AnimalDetailsFragment : BaseFragment<FragmentAnimalDetailsBinding>() {
             is AnimalDetailsViewModel.AnimalDetailsState.Success -> {
                 showAnimalDetails(it.animalDetails)
             }
+
+            AnimalDetailsViewModel.AnimalDetailsState.Error -> {
+                // TODO
+            }
         }
     }
 
