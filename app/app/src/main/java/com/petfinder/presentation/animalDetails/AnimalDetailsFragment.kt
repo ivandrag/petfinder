@@ -18,11 +18,11 @@ class AnimalDetailsFragment : BaseFragment<FragmentAnimalDetailsBinding>() {
     private val observer = Observer<AnimalDetailsViewModel.AnimalDetailsState> {
         when (it) {
             is AnimalDetailsViewModel.AnimalDetailsState.Success -> {
-                showAnimalDetails(it.animalDetails)
+                showAnimalDetailsSuccess(it.animalDetails)
             }
 
             AnimalDetailsViewModel.AnimalDetailsState.Error -> {
-                // TODO
+                showAnimalDetailsError()
             }
         }
     }
@@ -41,15 +41,46 @@ class AnimalDetailsFragment : BaseFragment<FragmentAnimalDetailsBinding>() {
         animalDetailsViewModel.getAnimalDetails(id)
     }
 
-    private fun showAnimalDetails(animalDetails: UiAnimalDetails) {
+    private fun showAnimalDetailsSuccess(animalDetails: UiAnimalDetails) {
         val (name, breed, size, gender, status, distance) = animalDetails
         with(binding) {
-            nameTextView.text = name
-            breedTextView.text = String.format(getString(R.string.animal_details_fragment_breed_text), breed)
-            sizeTextView.text = String.format(getString(R.string.animal_details_fragment_size_text), size)
-            genderTextView.text = String.format(getString(R.string.animal_details_fragment_gender_text), gender)
-            statusTextView.text = String.format(getString(R.string.animal_details_fragment_status_text), status)
-            distanceTextView.text = String.format(getString(R.string.animal_details_fragment_distance_text), distance)
+            successLayout.root.visibility = View.VISIBLE
+            errorLayout.root.visibility = View.GONE
+            with(successLayout) {
+                nameTextView.text = name
+                breedTextView.text = String.format(
+                    getString(R.string.animal_details_fragment_breed_text),
+                    breed
+                )
+                sizeTextView.text = String.format(
+                    getString(R.string.animal_details_fragment_size_text),
+                    size
+                )
+                genderTextView.text = String.format(
+                    getString(R.string.animal_details_fragment_gender_text),
+                    gender
+                )
+                statusTextView.text = String.format(
+                    getString(R.string.animal_details_fragment_status_text),
+                    status
+                )
+                distanceTextView.text = String.format(
+                    getString(R.string.animal_details_fragment_distance_text),
+                    distance
+                )
+            }
+        }
+    }
+
+    private fun showAnimalDetailsError() {
+        with(binding) {
+            errorLayout.root.visibility = View.VISIBLE
+            successLayout.root.visibility = View.GONE
+            errorLayout.retryButton.setOnClickListener {
+                animalDetailsViewModel.getAnimalDetails(
+                    arguments?.getInt(ANIMAL_ID)
+                )
+            }
         }
     }
 

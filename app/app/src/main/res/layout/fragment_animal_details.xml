@@ -1,88 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/default_margin_16">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/name_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="@dimen/default_margin_16"
-        android:textSize="@dimen/default_text_18_size"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Charlie" />
+    <include
+        android:id="@+id/success_layout"
+        layout="@layout/animal_details_success"
+        android:visibility="gone" />
 
-    <View
-        android:id="@+id/divider_view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginEnd="@dimen/default_margin_32"
-        android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/name_textView" />
-
-    <TextView
-        android:id="@+id/breed_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin_32"
-        android:drawablePadding="@dimen/default_padding_8"
-        android:textSize="@dimen/default_text_16_size"
-        app:drawableStartCompat="@drawable/ic_star"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider_view"
-        tools:text="Breed: French bulldog" />
-
-    <TextView
-        android:id="@+id/size_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin_16"
-        android:drawablePadding="@dimen/default_padding_8"
-        android:textSize="@dimen/default_text_16_size"
-        app:drawableStartCompat="@drawable/ic_star"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/breed_textView"
-        tools:text="Size: Small" />
-
-    <TextView
-        android:id="@+id/gender_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin_16"
-        android:drawablePadding="@dimen/default_padding_8"
-        android:textSize="@dimen/default_text_16_size"
-        app:drawableStartCompat="@drawable/ic_star"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/size_textView"
-        tools:text="Gender: Male" />
-
-    <TextView
-        android:id="@+id/status_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin_16"
-        android:drawablePadding="@dimen/default_padding_8"
-        android:textSize="@dimen/default_text_16_size"
-        app:drawableStartCompat="@drawable/ic_star"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gender_textView"
-        tools:text="Status: adoptable" />
-
-    <TextView
-        android:id="@+id/distance_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin_16"
-        android:drawablePadding="@dimen/default_padding_8"
-        android:textSize="@dimen/default_text_16_size"
-        app:drawableStartCompat="@drawable/ic_star"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/status_textView"
-        tools:text="Distance: 20km" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/error_layout"
+        layout="@layout/animal_details_error"
+        android:visibility="gone" />
+</FrameLayout>

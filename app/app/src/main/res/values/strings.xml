@@ -7,4 +7,6 @@
     <string name="animal_details_fragment_status_text">Status: %1$s</string>
     <string name="animal_details_fragment_distance_text">Location: %1$s</string>
     <string name="animal_details_fragment_distance_not_available_text">Not available</string>
+    <string name="animal_details_fragment_error_text">Something went wrong. Please retry.</string>
+    <string name="animal_details_fragment_retry_button_text">Retry</string>
 </resources>
