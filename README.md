@@ -72,7 +72,7 @@ This project uses JUnit 4 framework and Mockk library for unit tests.
 
 presentation - unit test our viewModel
 
-* Things TODO:
+## Things TODO:
    * Modularization.
    * Add loading state in animal list and animal details.
    * Add pull to refresh on animal list fragment.
