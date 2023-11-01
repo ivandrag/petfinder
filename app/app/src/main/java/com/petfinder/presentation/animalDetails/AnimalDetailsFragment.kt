@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import com.petfinder.R
 import com.petfinder.databinding.FragmentAnimalDetailsBinding
 import com.petfinder.presentation.BaseFragment
 import com.petfinder.presentation.animalDetails.model.UiAnimalDetails
@@ -44,6 +45,11 @@ class AnimalDetailsFragment : BaseFragment<FragmentAnimalDetailsBinding>() {
         val (name, breed, size, gender, status, distance) = animalDetails
         with(binding) {
             nameTextView.text = name
+            breedTextView.text = String.format(getString(R.string.animal_details_fragment_breed_text), breed)
+            sizeTextView.text = String.format(getString(R.string.animal_details_fragment_size_text), size)
+            genderTextView.text = String.format(getString(R.string.animal_details_fragment_gender_text), gender)
+            statusTextView.text = String.format(getString(R.string.animal_details_fragment_status_text), status)
+            distanceTextView.text = String.format(getString(R.string.animal_details_fragment_distance_text), distance)
         }
     }
 

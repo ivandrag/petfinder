@@ -7,6 +7,9 @@ import com.petfinder.presentation.animalDetails.model.UiAnimalDetails
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
+private const val DISTANCE_NOT_AVAILABLE = "not available"
+private const val DEFAULT_DISTANCE = 0.0
+
 class AnimalDetailsViewModel(
     private val animalDetailsRepository: AnimalDetailsRepository
 ) : BaseViewModel() {
@@ -34,7 +37,11 @@ class AnimalDetailsViewModel(
                 size = animal.size,
                 gender = animal.gender,
                 status = animal.status,
-                distance = animal.distance.toString()
+                distance = animal.distance.let {
+                    if (it == DEFAULT_DISTANCE)
+                        DISTANCE_NOT_AVAILABLE
+                    else it.toString()
+                }
             )
         )
     }

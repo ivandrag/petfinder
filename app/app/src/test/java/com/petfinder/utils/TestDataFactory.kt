@@ -12,7 +12,7 @@ import com.petfinder.domain.model.Video
 
 class TestDataFactory {
 
-    fun createAnimal(): Animal {
+    fun createAnimal(distance: Double): Animal {
         val photo = Photo(
             small = "small.jpg",
             medium = "medium.jpg",
@@ -88,7 +88,7 @@ class TestDataFactory {
             tags = listOf("Playful", "Friendly", "Good with kids"),
             contact = contact,
             publishedAt = "2020-01-01T00:00:00Z",
-            distance = 10.0
+            distance = distance
         )
     }
 }

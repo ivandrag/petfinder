@@ -41,7 +41,7 @@ class AnimalDetailsViewModelTest {
     fun `getAnimalDetails when success then state is Success`() {
         val id = 1
         val animalDetailsResponse = mockk<AnimalDetailsResponse>()
-        val animal = testDataFactory.createAnimal()
+        val animal = testDataFactory.createAnimal(10.0)
         val uiAnimalDetails = UiAnimalDetails(
             name = animal.name,
             breed = animal.breeds.primary.orEmpty(),
@@ -51,7 +51,34 @@ class AnimalDetailsViewModelTest {
             distance = animal.distance.toString()
         )
 
-        every { animalDetailsResponse.animal } returns testDataFactory.createAnimal()
+        every { animalDetailsResponse.animal } returns animal
+        every { observer.onChanged(any()) } just Runs
+        every {
+            animalDetailsRepository.getAnimalDetails(id)
+        } returns Single.just(animalDetailsResponse)
+
+        viewModel.getAnimalDetails(id)
+
+        verify {
+            observer.onChanged(AnimalDetailsViewModel.AnimalDetailsState.Success(uiAnimalDetails))
+        }
+    }
+
+    @Test
+    fun `getAnimalDetails when distance equals 0 then distance is not available`() {
+        val id = 1
+        val animalDetailsResponse = mockk<AnimalDetailsResponse>()
+        val animal = testDataFactory.createAnimal(0.0)
+        val uiAnimalDetails = UiAnimalDetails(
+            name = animal.name,
+            breed = animal.breeds.primary.orEmpty(),
+            size = animal.size,
+            gender = animal.gender,
+            status = animal.status,
+            distance = "not available"
+        )
+
+        every { animalDetailsResponse.animal } returns animal
         every { observer.onChanged(any()) } just Runs
         every {
             animalDetailsRepository.getAnimalDetails(id)

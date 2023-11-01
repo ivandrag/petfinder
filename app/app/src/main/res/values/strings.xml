@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PetFinder</string>
+
+    <string name="animal_details_fragment_breed_text">Breed: %1$s</string>
+    <string name="animal_details_fragment_size_text">Size: %1$s</string>
+    <string name="animal_details_fragment_gender_text">Gender: %1$s</string>
+    <string name="animal_details_fragment_status_text">Status: %1$s</string>
+    <string name="animal_details_fragment_distance_text">Location: %1$s</string>
+    <string name="animal_details_fragment_distance_not_available_text">Not available</string>
 </resources>
