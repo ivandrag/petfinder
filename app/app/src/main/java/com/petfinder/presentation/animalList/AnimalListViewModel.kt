@@ -2,8 +2,10 @@ package com.petfinder.presentation.animalList
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.map
+import androidx.paging.rxjava3.cachedIn
 import com.petfinder.domain.model.Animal
 import com.petfinder.domain.repository.AnimalListRepository
 import com.petfinder.presentation.animalDetails.BaseViewModel
@@ -22,6 +24,7 @@ class AnimalListViewModel(
         disposable.add(animalListRepository.getAllAnimals()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .cachedIn(viewModelScope)
             .subscribe(
                 { data -> _animals.value = mapToUiAnimalPagingData(data) },
                 {}
